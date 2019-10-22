@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using Grace.DependencyInjection;
 
 namespace Designer.Core
@@ -22,6 +23,7 @@ namespace Designer.Core
         {
             var document = locatorService.Locate<Document>();
             document.Name = "New document";
+            document.Graphics = new ObservableCollection<Node>();
             return document;
         }
     }
