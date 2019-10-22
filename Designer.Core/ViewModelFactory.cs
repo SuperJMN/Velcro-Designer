@@ -15,7 +15,9 @@ namespace Designer.Core
         public Project CreateProject()
         {
             var project = locatorService.Locate<Project>();
-            project.Documents.Add(CreateDocument());
+            var document = CreateDocument();
+            project.Documents.Add(document);
+            project.SelectedDocument = document;
             return project;
         }
 

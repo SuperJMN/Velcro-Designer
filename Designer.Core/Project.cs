@@ -42,7 +42,7 @@ namespace Designer.Core
 
         public Document SelectedDocument
         {
-            get => selectedDocument ?? Documents?.FirstOrDefault();
+            get => selectedDocument;
             set => this.RaiseAndSetIfChanged(ref selectedDocument, value);
         }
 
