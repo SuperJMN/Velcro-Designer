@@ -1,2 +1,0 @@
-# Zafiro
-The new "GLASS"
