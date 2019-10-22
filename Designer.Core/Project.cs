@@ -32,9 +32,7 @@ namespace Designer.Core
 
             AddDocument = ReactiveCommand.Create(() =>
             {
-                var item = factory.CreateDocument();
-                item.Name = "New document";
-                Documents.Add(item);
+                Documents.Add(factory.CreateDocument());
             });
         }
 

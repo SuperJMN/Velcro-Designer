@@ -13,12 +13,16 @@ namespace Designer.Core
 
         public Project CreateProject()
         {
-            return locatorService.Locate<Project>();
+            var project = locatorService.Locate<Project>();
+            project.Documents.Add(CreateDocument());
+            return project;
         }
 
         public Document CreateDocument()
         {
-            return locatorService.Locate<Document>();
+            var document = locatorService.Locate<Document>();
+            document.Name = "New document";
+            return document;
         }
     }
 }

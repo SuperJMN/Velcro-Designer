@@ -32,6 +32,7 @@ namespace Designer
                 registrationBlock.Export<PluginProvider>().As<IPluginProvider>().Lifestyle.Singleton();
                 registrationBlock.Export<ViewModelFactory>().As<IViewModelFactory>().Lifestyle.Singleton();
                 registrationBlock.Export<ProjectStore>().As<IProjectStore>().Lifestyle.Singleton();
+                registrationBlock.Export<MainViewModel>().Lifestyle.Singleton();
             });
         }
 

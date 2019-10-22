@@ -38,11 +38,13 @@
                        SelectedItem="{Binding SelectedDocument, Mode=TwoWay}">
 
                     <ct:TabView.TabActionHeader>
-                        <Button Command="{Binding AddDocument}" 
-                                Margin="-1,0,0,0"
+                        <Button Command="{Binding AddDocument}"
+                                Margin="4"
                                 BorderThickness="1"
                                 Background="Transparent">
-                            <SymbolIcon Symbol="Add" />
+                            <Viewbox Height="15">
+                                <SymbolIcon Symbol="Add" />
+                            </Viewbox>
                         </Button>
                     </ct:TabView.TabActionHeader>
 
@@ -72,9 +74,36 @@
                     </ct:TabView.ItemTemplate>
                 </ct:TabView>
 
-                <ct:GridSplitter Grid.Column="2" />
+                <ct:GridSplitter Grid.Column="2" Opacity="0.5"/>
 
-                <ct:HeaderedContentControl Header="Properties" Grid.Column="3">
+                <ct:HeaderedContentControl Header="Properties" Grid.Column="3" HorizontalContentAlignment="Stretch">
+                    <ct:HeaderedContentControl.Style>
+                        <Style TargetType="ct:HeaderedContentControl" >
+                            <Setter Property="BorderThickness" Value="1" />
+                            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ct:HeaderedContentControl">
+                                        <Border
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Border Background="{TemplateBinding Background}" Padding="{ThemeResource ButtonBorderThemeThickness}">
+                                                    <TextBlock Text="{TemplateBinding Header}" TextAlignment="Center" FontWeight="Bold" TextWrapping="Wrap" Foreground="{ThemeResource AppBarBorderThemeBrush}"/>
+                                                </Border>
+                                                <ContentPresenter Grid.Row="1" />
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ct:HeaderedContentControl.Style>
                     <parts:PropertiesControl />
                 </ct:HeaderedContentControl>
             </Grid>
