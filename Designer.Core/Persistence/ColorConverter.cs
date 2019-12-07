@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Designer.Domain.Models;
 using ExtendedXmlSerializer.ContentModel.Conversion;
 
 namespace Designer.Core.Persistence

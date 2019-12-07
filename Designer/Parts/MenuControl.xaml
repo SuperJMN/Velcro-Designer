@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:designer="using:Designer"
     xmlns:core="using:Designer.Core"
     mc:Ignorable="d"
     d:DesignHeight="300"
@@ -16,19 +15,21 @@
             <MenuFlyoutSeparator />
             <MenuFlyoutItem Text="Open" Command="{Binding Load}" />
             <MenuFlyoutSeparator  />
+            <MenuFlyoutItem Text="Import" Command="{Binding ShowImport}" />
+            <MenuFlyoutSeparator  />
             <MenuFlyoutItem Text="Save" Command="{Binding Save}" />
         </MenuBarItem>
         <MenuBarItem Title="Object">
             <MenuFlyoutSubItem Text="Alignment">
-                <!--<MenuFlyoutItem Text="Align to left" Command="{Binding AlignCommands.AlignToLeftCommand}" />
-                <MenuFlyoutItem Text="Align to right" Command="{Binding AlignCommands.AlignToRightCommand}" />
-                <MenuFlyoutItem Text="Align to top" Command="{Binding AlignCommands.AlignToTopCommand}" />
-                <MenuFlyoutItem Text="Align to bottom" Command="{Binding AlignCommands.AlignToBottomCommand}" />-->
+                <MenuFlyoutItem Text="Align to left" Command="{Binding DesignContext.DesignCommandsHost.AlignLeft}" />
+                <MenuFlyoutItem Text="Align to right" Command="{Binding DesignContext.DesignCommandsHost.AlignRight}" />
+                <MenuFlyoutItem Text="Align to top" Command="{Binding DesignContext.DesignCommandsHost.AlignTop}" />
+                <MenuFlyoutItem Text="Align to bottom" Command="{Binding DesignContext.DesignCommandsHost.AlignBottom}" />
             </MenuFlyoutSubItem>
-            <MenuFlyoutSubItem Text="Z-order">
-                <!--<MenuFlyoutItem Text="Send to front" Command="{Binding ZOrderCommands.SendToFrontCommand}" />
-                <MenuFlyoutItem Text="Send to back" Command="{Binding ZOrderCommands.SendToBackCommand}" />-->                
-            </MenuFlyoutSubItem>
+            <!--<MenuFlyoutSubItem Text="Z-order">
+                <MenuFlyoutItem Text="Send to front" Command="{Binding ZOrderCommands.SendToFrontCommand}" />
+                <MenuFlyoutItem Text="Send to back" Command="{Binding ZOrderCommands.SendToBackCommand}" />
+            </MenuFlyoutSubItem>-->
         </MenuBarItem>
     </MenuBar>
 </UserControl>

@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reactive.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -17,8 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Designer.Core;
-using Zafiro.Uwp.Controls;
+using Zafiro.Uwp;
 
 namespace Designer
 {
@@ -121,7 +118,7 @@ namespace Designer
             Window.Current.Activate();
 
             var file = args.Files[0];
-            var uwpFile = new UwpFile((StorageFile) file);
+            var uwpFile = new UwpFile((StorageFile)file);
 
             Composition.Root.LoadFromFile.Execute(uwpFile).Subscribe();
         }

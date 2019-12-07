@@ -2,7 +2,7 @@ using System;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Designer.Core;
-using Designer.Model;
+using Designer.Domain.Models;
 
 namespace Designer.Converters
 {

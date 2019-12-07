@@ -1,7 +1,6 @@
 using System;
 using Windows.UI.Xaml.Data;
-using Designer.Core;
-using Designer.Model;
+using Designer.Domain.Models;
 
 namespace Designer.Converters
 {

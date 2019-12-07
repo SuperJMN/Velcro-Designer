@@ -6,12 +6,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:Designer.Converters"
     xmlns:valueConverters="using:ValueConverters"
-    xmlns:designer="using:Designer"
-    xmlns:core="using:Designer.Core"
     xmlns:tools="using:Designer.Core.Tools"
+    xmlns:items="using:Designer.Domain.ViewModels"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400" d:DataContext="{d:DesignInstance core:Project}">
+    d:DesignWidth="400" d:DataContext="{d:DesignInstance items:Document}">
 
     <UserControl.Resources>
         <converters:ValueConverterGroup x:Key="ToolTypeToImageConverter">
@@ -19,8 +18,11 @@
             <valueConverters:StringToObjectConverter>
                 <valueConverters:StringToObjectConverter.Items>
                     <ResourceDictionary>
-                        <BitmapImage x:Key="CircleShapeTool" UriSource="/Assets/Tools/CircleShape.png" />
-                        <BitmapImage x:Key="PointTool" UriSource="/Assets/Tools/Point.png" />
+                        <BitmapImage x:Key="RectangleTool" UriSource="/Assets/Tools/Rectangle.png" />
+                        <BitmapImage x:Key="EllipseTool" UriSource="/Assets/Tools/Ellipse.png" />
+                        <BitmapImage x:Key="TextTool" UriSource="/Assets/Tools/Text.png" />
+                        <BitmapImage x:Key="LineTool" UriSource="/Assets/Tools/Line.png" />
+                        <BitmapImage x:Key="ImageTool" UriSource="/Assets/Tools/Image.png" />
                     </ResourceDictionary>
                 </valueConverters:StringToObjectConverter.Items>
             </valueConverters:StringToObjectConverter>
@@ -30,10 +32,17 @@
 
     <Border>
         <ItemsControl ItemsSource="{Binding Tools}">
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button Command="{Binding CreateCommand}" Background="Transparent"
-                            d:DataContext="{d:DesignInstance tools:Tool}">
+                            d:DataContext="{d:DesignInstance items:Tool}">
 
                         <Button.Content>
                             <Image Width="25" Height="25"

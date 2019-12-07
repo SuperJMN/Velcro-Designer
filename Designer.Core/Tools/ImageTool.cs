@@ -1,29 +1,41 @@
+using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Designer.Model;
+using Designer.Domain.Models;
+using Designer.Domain.ViewModels;
+using Zafiro.Core;
+using Zafiro.Core.Files;
+using Zafiro.Core.Mixins;
+using Image = Designer.Domain.ViewModels.Image;
 
 namespace Designer.Core.Tools
 {
     public class ImageTool : Tool
     {
-        protected override Task<CreationResult> Create(Rect creationArea)
-        {
-            //var file = await picker.PickSingleFileAsync();
-            //if (file == null)
-            //{
-            //    return new CreationResult();
-            //}
+        private IFilePicker filePicker;
 
-            //var bytes = await file.ReadBytesAsync();
-            
-            //return new CreationResult(new Image
-            //{
-            //    Source = bytes,
-            //});
-            return Task.FromResult(new CreationResult(new CircleShape()));
+        public ImageTool(IFilePicker filePicker, IDesignContext context) : base(context)
+        {
+            this.filePicker = filePicker;
         }
 
-        public ImageTool(IDesignContext context) : base(context)
+        protected override async Task<CreationResult> Create(Rect creationArea)
         {
+            var file = await filePicker.Pick("Open", new[] {".png", ".jpg", ".bmp"}).FirstAsync();
+            if (file == null)
+            {
+                return new CreationResult { IsSuccessful = false };
+            }
+
+            using (var stream = await file.OpenForRead())
+            {
+                var bytes = await stream.ReadBytes();
+                return new CreationResult(new Image()
+                {
+                    Width = 200,
+                    Height = 200,
+                    Source = bytes,
+                });
+            }
         }
     }
 }

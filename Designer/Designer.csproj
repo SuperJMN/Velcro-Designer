@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Designer</RootNamespace>
     <AssemblyName>Designer</AssemblyName>
-    <DefaultLanguage>es-ES</DefaultLanguage>
+    <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
@@ -17,7 +17,43 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
-    <PackageCertificateKeyFile>Designer_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>
+    </PackageCertificateKeyFile>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>66F99F899DE15064D8B96B2FF3D3C4CC505E9DE1</PackageCertificateThumbprint>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <Use64Bitcompiler>true</Use64Bitcompiler>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -95,20 +131,51 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BoundsDragDeltaControl1.cs" />
+    <Compile Include="BoundsDragDeltaControl2.cs" />
     <Compile Include="ChangeSignConverter.cs" />
     <Compile Include="ColorCollection.cs" />
     <Compile Include="Composition.cs" />
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Converters\CornerRadiusConverter.cs" />
+    <Compile Include="Converters\ZeroToCollapsedConverter.cs" />
+    <Compile Include="Converters\DoubleToCornerRadiusConverter.cs" />
     <Compile Include="Converters\MyConverter.cs" />
     <Compile Include="Converters\ThicknessConverter.cs" />
-    <Compile Include="Converters\TintedColorConverter.cs" />
     <Compile Include="Converters\ValueConverterGroup.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
-    <Compile Include="FocusConverter.cs" />
     <Compile Include="Converters\ShadowConverter.cs" />
+    <Compile Include="Extensions\AppServiceExtensions.cs" />
+    <Compile Include="Extensions\ServiceException.cs" />
+    <Compile Include="Extensions\WindowsAppService.cs" />
+    <Compile Include="Parts\DesignCommandsHost.cs" />
     <Compile Include="Parts\EditorControl.xaml.cs">
       <DependentUpon>EditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\ExtensionsProvider.cs" />
+    <Compile Include="Parts\Graphics\EllipseControl.xaml.cs">
+      <DependentUpon>EllipseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\LineControl.xaml.cs">
+      <DependentUpon>LineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\NumericFieldControl.xaml.cs">
+      <DependentUpon>NumericFieldControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\RectangleControl.xaml.cs">
+      <DependentUpon>RectangleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\TextBoxControl.xaml.cs">
+      <DependentUpon>TextBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\Graphics\TextFieldControl.xaml.cs">
+      <DependentUpon>TextFieldControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\ImportExtensionsControl.xaml.cs">
+      <DependentUpon>ImportExtensionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parts\MainSurfaceControl.xaml.cs">
+      <DependentUpon>MainSurfaceControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Parts\MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
@@ -122,10 +189,10 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PluginProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Converters\TypeNameConverter.cs" />
-    <Compile Include="TemplateSelectors\ItemTemplateSelector.cs" />
+    <Compile Include="ServiceFactory.cs" />
+    <Compile Include="TemplateSelectors\TypeNameTemplateSelector.cs" />
     <Compile Include="Converters\WindowsColorToBrushConverter.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +242,7 @@
     <Content Include="Assets\StoreLogo.scale-200.png" />
     <Content Include="Assets\StoreLogo.scale-400.png" />
     <Content Include="Assets\Tools\CircleShape.png" />
+    <Content Include="Assets\Tools\Ellipse.png" />
     <Content Include="Assets\Tools\Image.png" />
     <Content Include="Assets\Tools\Line.png" />
     <Content Include="Assets\Tools\Point.png" />
@@ -186,6 +254,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -207,6 +276,38 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Parts\Graphics\EllipseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\LineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\NumericFieldControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\RectangleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\TextBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\TextFieldControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\ImportExtensionsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\MainSurfaceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Parts\MenuControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -218,6 +319,10 @@
     <Page Include="Parts\ToolsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -231,45 +336,55 @@
       <Version>6.2.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit">
-      <Version>5.1.1</Version>
+      <Version>6.0.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
-      <Version>5.1.1</Version>
+      <Version>6.0.0</Version>
     </PackageReference>
     <PackageReference Include="ReactiveUI">
-      <Version>10.4.1</Version>
+      <Version>10.5.31</Version>
     </PackageReference>
     <PackageReference Include="ValueConverters">
       <Version>2.0.19091.2</Version>
     </PackageReference>
     <PackageReference Include="Win2D.uwp">
-      <Version>1.23.0</Version>
+      <Version>1.24.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Designer.Core\Designer.Core.csproj">
-      <Project>{A1B7D9D0-A52B-477E-8791-6FBCCF1ABAE8}</Project>
+      <Project>{a1b7d9d0-a52b-477e-8791-6fbccf1abae8}</Project>
       <Name>Designer.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MonoGame.Parser\MonoGame.Parser.csproj">
-      <Project>{1319248F-0660-4CD4-A93D-BFB0AD85AA6E}</Project>
-      <Name>MonoGame.Parser</Name>
+    <ProjectReference Include="..\Designer.Domain.Models\Designer.Domain.Models.csproj">
+      <Project>{b86fc71e-e88c-4e03-8510-49f40075f0fd}</Project>
+      <Name>Designer.Domain.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zafiro\Zafiro.Core\Zafiro.Core.csproj">
-      <Project>{BBD924F6-514B-40C4-AD3A-F6265FE49717}</Project>
+    <ProjectReference Include="..\Designer.Domain.ViewModels\Designer.Domain.ViewModels.csproj">
+      <Project>{D74A11DB-4403-4C74-9F1C-260C4695138C}</Project>
+      <Name>Designer.Domain.ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zafiro\Source\Zafiro.Core\Zafiro.Core.csproj">
+      <Project>{e977c6c6-1089-4687-a774-a2e6d77c4c3d}</Project>
       <Name>Zafiro.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zafiro\Zafiro.Uwp.Designer\Zafiro.Uwp.Designer.csproj">
+    <ProjectReference Include="..\Zafiro\Source\Zafiro.Uwp.Design\Zafiro.Uwp.Design.csproj">
       <Project>{a8d0162a-4a08-40b0-91d5-e5290c1e8a0d}</Project>
-      <Name>Zafiro.Uwp.Designer</Name>
+      <Name>Zafiro.Uwp.Design</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zafiro\Zafiro.Uwp\Zafiro.Uwp.csproj">
-      <Project>{889D7132-88F9-4254-9640-1E38ED419184}</Project>
+    <ProjectReference Include="..\Zafiro\Source\Zafiro.Uwp\Zafiro.Uwp.csproj">
+      <Project>{889d7132-88f9-4254-9640-1e38ed419184}</Project>
       <Name>Zafiro.Uwp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <DocumentationFile>
+    </DocumentationFile>
+    <PlatformTarget>ARM64</PlatformTarget>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

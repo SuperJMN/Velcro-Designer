@@ -4,116 +4,140 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:lw="using:Zafiro.Uwp.Controls.Lightweight"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:designer="using:Zafiro.Uwp.Designer"
-    xmlns:des="using:Designer"
-    xmlns:model="using:Designer.Model"
+    xmlns:designer="using:Zafiro.Uwp.Design"
     xmlns:sel="using:Designer.TemplateSelectors"
-    xmlns:conv="using:Designer.Converters"
-    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
-    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
-    xmlns:core1="using:Designer.Core"
+    xmlns:items="using:Designer.Domain.ViewModels"
+    xmlns:graphics="using:Designer.Parts.Graphics"
+    xmlns:parts="using:Designer.Parts"
+    xmlns:lightweight="using:Zafiro.Uwp.Lightweight"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400" d:DataContext="{d:DesignInstance core1:Document}">
+    d:DesignWidth="400" d:DataContext="{d:DesignInstance items:Document}">
 
     <UserControl.Resources>
 
-        <sel:TypeNameTemplateSelector x:Key="SuperTemplateSelector">
+        <sel:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector">
             <sel:TypeNameTemplateSelector.Items>
                 <ResourceDictionary>
-
-                    <DataTemplate x:Key="CircleShape" x:DataType="core1:CircleShape">
-                        <ContentControl>
-                            <Grid AllowFocusOnInteraction="True">
-                                <Grid.Resources>
-                                    <Style x:Key="DeltaContentControlStyle"
-                                           TargetType="designer:DeltaContentControl">
-                                        <Setter Property="Width" Value="8" />
-                                        <Setter Property="Height" Value="8" />
-                                        <Setter Property="ContentTemplate">
-                                            <Setter.Value>
-                                                <DataTemplate>
-                                                    <Grid Background="White" BorderBrush="Black"
-                                                          BorderThickness="1" />
-                                                </DataTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </Grid.Resources>
-                                <Ellipse d:DataContext="{d:DesignInstance core1:CircleShape}"
-                                         Fill="Red"
-                                         Width="{Binding Radius}" Height="{Binding Radius}" />
-                                <designer:DeltaContentControl x:Name="Resizer" 
-                                                              extensions:Mouse.Cursor="SizeNorthwestSoutheast"
-                                                              Visibility="Collapsed"
-                                                              Style="{StaticResource DeltaContentControlStyle}"
-                                                              Horizontal="{Binding Radius, Mode=TwoWay}"
-                                                              VerticalAlignment="Bottom" HorizontalAlignment="Right" />
-
-                            </Grid>
-
-                            <interactivity:Interaction.Behaviors>
-                                <core:EventTriggerBehavior EventName="GotFocus">
-                                    <core:ChangePropertyAction TargetObject="{Binding ElementName=Resizer}"
-                                                               PropertyName="Visibility" Value="Visible" />
-                                </core:EventTriggerBehavior>
-                                <core:EventTriggerBehavior EventName="LostFocus">
-                                    <core:ChangePropertyAction TargetObject="{Binding ElementName=Resizer}"
-                                                               PropertyName="Visibility" Value="Collapsed" />
-                                </core:EventTriggerBehavior>
-                            </interactivity:Interaction.Behaviors>
-
-                        </ContentControl>
+                    <DataTemplate x:Key="Rectangle">
+                        <graphics:RectangleControl />
                     </DataTemplate>
 
-                    <DataTemplate x:Key="Point" x:DataType="core1:Point">
-                        <Ellipse Stretch="Fill" Width="15" Height="15" Fill="Green" />
+                    <DataTemplate x:Key="Ellipse" x:DataType="items:Ellipse">
+                        <graphics:EllipseControl />
                     </DataTemplate>
 
+                    <DataTemplate x:Key="Image" x:DataType="items:Image">
+                        <Image Stretch="Fill" Source="{Binding Source, Converter={StaticResource ImageConverter}}" />
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="TextBox">
+                        <graphics:TextBoxControl />
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="TextField">
+                        <graphics:TextFieldControl />
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="NumericField">
+                        <graphics:NumericFieldControl />
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="Line" x:DataType="Line">
+                        <graphics:LineControl />
+                    </DataTemplate>
                 </ResourceDictionary>
             </sel:TypeNameTemplateSelector.Items>
         </sel:TypeNameTemplateSelector>
 
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition  />
-        </Grid.RowDefinitions>
+    <controls:DockPanel>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+        <Grid controls:DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <parts:ToolsControl />
+            <CommandBar Background="{ThemeResource AppBarBackgroundThemeBrush}" Grid.Column="1">
+                <AppBarButton Command="{Binding AlignToLeftCommand, ElementName=DesignerSurface}" Label="Align left">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xF594;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Command="{Binding AlignToRightCommand, ElementName=DesignerSurface}" Label="Align right">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xF595;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Command="{Binding AlignToTopCommand, ElementName=DesignerSurface}" Label="Align top">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xF596;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Command="{Binding AlignToBottomCommand, ElementName=DesignerSurface}"
+                              Label="Align bottom">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#xF597;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar>
+        </Grid>
 
-        <lw:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <controls:LayoutTransformControl Grid.Column="0" Grid.Row="1">
-            <controls:LayoutTransformControl.Transform>
-                <RotateTransform Angle="-90" />
-            </controls:LayoutTransformControl.Transform>
-            <lw:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5, 0.5">
-                <lw:Ruler.RenderTransform>
-                    <ScaleTransform ScaleX="-1" ScaleY="1" />
-                </lw:Ruler.RenderTransform>
-            </lw:Ruler>
-        </controls:LayoutTransformControl>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-        <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
-        <designer:DesignerSurface Grid.Column="1"
-                                  Grid.Row="1"
-                                  x:Name="DesignerSurface"
-                                  ItemsSource="{Binding Graphics}"
-                                  LeftBinding="{Binding Left, Mode=TwoWay}"
-                                  TopBinding="{Binding Top, Mode=TwoWay}"
-                                  CanResize="false"
-                                  ItemTemplateSelector="{StaticResource SuperTemplateSelector}"
-                                  SelectedItems="{Binding SelectedItems, Mode=TwoWay}" />
-        <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
-    </Grid>
+            <lightweight:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" Grid.Column="1" Grid.Row="0"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+            <controls:LayoutTransformControl Grid.Column="0" Grid.Row="1">
+                <controls:LayoutTransformControl.Transform>
+                    <RotateTransform Angle="-90" />
+                </controls:LayoutTransformControl.Transform>
+                <lightweight:Ruler BorderThickness="0,0,0,1" BorderBrush="Black" HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch" RenderTransformOrigin="0.5, 0.5">
+                    <lightweight:Ruler.RenderTransform>
+                        <ScaleTransform ScaleX="-1" ScaleY="1" />
+                    </lightweight:Ruler.RenderTransform>
+                </lightweight:Ruler>
+            </controls:LayoutTransformControl>
+
+            <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
+            <designer:DesignerSurface Grid.Column="1"
+                                      Grid.Row="1"
+                                      x:Name="DesignerSurface"
+                                      ItemsSource="{Binding Graphics}"
+                                      LeftBinding="{Binding Left, Mode=TwoWay}"
+                                      TopBinding="{Binding Top, Mode=TwoWay}"
+                                      HeightBinding="{Binding Height, Mode=TwoWay}"
+                                      WidthBinding="{Binding Width, Mode=TwoWay}"
+                                      AngleBinding="{Binding Angle, Mode=OneWay}"
+                                      ItemTemplateSelector="{StaticResource TypeNameTemplateSelector}"
+                                      SelectedItems="{Binding SelectedItems, Mode=TwoWay}">
+                <designer:DesignerSurface.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Align to Left"
+                                        Command="{Binding ElementName=DesignerSurface, Path=AlignToLeftCommand}" />
+                        <MenuFlyoutItem Text="Align to Right"
+                                        Command="{Binding ElementName=DesignerSurface, Path=AlignToRightCommand}" />
+                        <MenuFlyoutItem Text="Align to Top"
+                                        Command="{Binding ElementName=DesignerSurface, Path=AlignToTopCommand}" />
+                        <MenuFlyoutItem Text="Align to Bottom"
+                                        Command="{Binding ElementName=DesignerSurface, Path=AlignToBottomCommand}" />
+                    </MenuFlyout>
+                </designer:DesignerSurface.ContextFlyout>
+            </designer:DesignerSurface>
+            <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
+        </Grid>
+    </controls:DockPanel>
 </UserControl>

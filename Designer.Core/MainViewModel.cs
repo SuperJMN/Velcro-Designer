@@ -1,43 +1,89 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive;
-using System.Reactive.Concurrency;
 using System.Reactive.Linq;
-using System.Reactive.Subjects;
-using System.Threading;
 using System.Threading.Tasks;
+using Designer.Domain.ViewModels;
 using ReactiveUI;
 using Zafiro.Core;
+using Zafiro.Core.Files;
+using Document = Designer.Domain.Models.Document;
 
 namespace Designer.Core
 {
     public class MainViewModel : ReactiveObject
     {
-        private readonly IProjectStore projectStore;
-        private readonly ObservableAsPropertyHelper<Project> project;
+        private readonly ObservableAsPropertyHelper<ReactiveCommand<Unit, Unit>> align;
         private readonly ObservableAsPropertyHelper<bool> isBusy;
-        private readonly ISubject<Project> fileLoader = new Subject<Project>();
+        private readonly IProjectMapper mapper;
+        private readonly ObservableAsPropertyHelper<Project> project;
+        private readonly IProjectStore projectStore;
+        private bool isImportVisible;
 
-        public MainViewModel(IFilePicker filePicker, IViewModelFactory viewModelFactory, IProjectStore projectStore)
+        public MainViewModel(IFilePicker filePicker, IProjectMapper mapper,
+            IProjectStore projectStore, ImportExtensionsViewModel importViewModel, IDesignContext designContext)
         {
+            DesignContext = designContext;
+            this.mapper = mapper;
             this.projectStore = projectStore;
 
-            var saveExtensions = new[] { new KeyValuePair<string, IList<string>>(Constants.FileFormatName, new List<string> { Constants.FileFormatExtension }) };
+            var saveExtensions = new[]
+            {
+                new KeyValuePair<string, IList<string>>(Constants.FileFormatName,
+                    new List<string> {Constants.FileFormatExtension})
+            };
 
-            Load = ReactiveCommand.CreateFromObservable(() => LoadProject(filePicker, new[] { Constants.FileFormatExtension }));
-            New = ReactiveCommand.Create(viewModelFactory.CreateProject);
+            Load = ReactiveCommand.CreateFromObservable(() =>
+                LoadProject(filePicker, new[] {Constants.FileFormatExtension}));
+
+            New = ReactiveCommand.Create(CreateNewDocument);
+
             Save = ReactiveCommand.CreateFromObservable(() => SaveProject(filePicker, Project, saveExtensions));
-            LoadFromFile = ReactiveCommand.CreateFromTask<ZafiroFile, Project>(e => LoadProject(e));
 
-            var projects = Load.Merge(New).Merge(LoadFromFile);
-            project = projects.ToProperty(this, model => model.Project);
+            LoadFromFile =
+                ReactiveCommand.CreateFromTask<ZafiroFile, Domain.Models.Project>(zafiroFile =>
+                    LoadProject(zafiroFile, projectStore));
 
-            isBusy = Load.IsExecuting.Merge(Save.IsExecuting).Merge(LoadFromFile.IsExecuting).ToProperty(this, x => x.IsBusy);
+            var projects = Load
+                .Merge(New)
+                .Merge(LoadFromFile)
+                .Merge(importViewModel.ImportedProjects)
+                .Do(_ => IsImportVisible = false);
+
+            project = projects
+                .Select(mapper.Map)
+                .Do(x => x.SelectedDocument = x.Documents.FirstOrDefault())
+                .ToProperty(this, model => model.Project);
+
+            isBusy = Load.IsExecuting
+                .Merge(Save.IsExecuting)
+                .Merge(importViewModel.IsBusy)
+                .Merge(LoadFromFile.IsExecuting)
+                .ToProperty(this, x => x.IsBusy);
 
             New.Execute().Subscribe();
+
+            ShowImport = ReactiveCommand.Create(() => IsImportVisible = true);
+            HideImport = ReactiveCommand.Create(() => IsImportVisible = false);
+            align = this.WhenAnyObservable(x => x.Project.SelectedDocument.AlignChanged).ToProperty(this, x => x.Align);
         }
 
-        public ReactiveCommand<ZafiroFile, Project> LoadFromFile { get; }
+        public IDesignContext DesignContext { get; }
+
+        public ReactiveCommand<Unit, Unit> Align => align.Value;
+
+        public ReactiveCommand<Unit, bool> ShowImport { get; }
+
+        public ReactiveCommand<Unit, bool> HideImport { get; }
+
+        public ReactiveCommand<ZafiroFile, Domain.Models.Project> LoadFromFile { get; }
+
+        public bool IsImportVisible
+        {
+            get => isImportVisible;
+            set => this.RaiseAndSetIfChanged(ref isImportVisible, value);
+        }
 
         public bool IsBusy => isBusy.Value;
 
@@ -45,25 +91,41 @@ namespace Designer.Core
 
         public Project Project => project.Value;
 
-        public ReactiveCommand<Unit, Project> New { get; }
+        public ReactiveCommand<Unit, Domain.Models.Project> New { get; }
 
-        private IObservable<Project> LoadProject(IFilePicker filePicker, string[] loadExtensions)
+        public ReactiveCommand<Unit, Domain.Models.Project> Load { get; }
+
+        private static Domain.Models.Project CreateNewDocument()
         {
-            return filePicker.Pick("Load", loadExtensions)
-                .SelectMany(LoadProject);
+            return new Domain.Models.Project
+            {
+                Documents = new List<Document>
+                {
+                    new Document
+                    {
+                        Name = "New document"
+                    }
+                }
+            };
         }
 
-        private async Task<Project> LoadProject(ZafiroFile file)
+        private IObservable<Domain.Models.Project> LoadProject(IFilePicker filePicker, string[] loadExtensions)
         {
-            var plugin = projectStore;
-            if (plugin == null)
+            return filePicker.Pick("Load", loadExtensions)
+                .Where(file => file != null)
+                .SelectMany(file => LoadProject(file, projectStore));
+        }
+
+        private async Task<Domain.Models.Project> LoadProject(ZafiroFile file, IProjectStore loader)
+        {
+            if (loader == null)
             {
                 throw new InvalidOperationException("No plugins to load this file type!");
             }
 
             using (var stream = await file.OpenForRead())
             {
-                return await plugin.Load(stream);
+                return await loader.Load(stream);
             }
         }
 
@@ -78,18 +140,11 @@ namespace Designer.Core
         {
             using (var stream = await file.OpenForWrite())
             {
-                await projectStore.Save(project, stream);
+                var model = mapper.Map(project);
+                await projectStore.Save(model, stream);
                 await stream.FlushAsync();
                 return project;
             }
-        }
-
-        public ReactiveCommand<Unit, Project> Load { get; }
-
-        public async Task LoadFile(ZafiroFile file)
-        {
-            var proj = await LoadProject(file);
-            fileLoader.OnNext(proj);
         }
     }
 }

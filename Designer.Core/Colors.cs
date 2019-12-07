@@ -1,4 +1,6 @@
-﻿namespace Designer.Core
+﻿using Designer.Domain.Models;
+
+namespace Designer.Core
 {
     public class Colors
     {

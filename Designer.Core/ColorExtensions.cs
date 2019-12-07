@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using Designer.Domain.Models;
 
 namespace Designer.Core
 {

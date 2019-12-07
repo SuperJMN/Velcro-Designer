@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="SuperJMN.VelcroDesigner" Publisher="CN=super" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="948402a0-be6b-49f4-a93d-c1e80c1082cf" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" 
+         xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp uap3">
+  <Identity Name="SuperJMN.VelcroDesigner" Publisher="CN=2F5DAE27-0DBB-414B-95A3-624160BB76D3" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="1db6b1ac-c541-4f2e-a227-b398a19ec154" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Designer</DisplayName>
+    <DisplayName>Velcro Designer</DisplayName>
     <PublisherDisplayName>SuperJMN</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -11,7 +13,7 @@
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
   </Dependencies>
   <Resources>
-    <Resource Language="x-generate" />
+    <Resource Language="en-US" />
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Designer.App">
@@ -21,15 +23,23 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
+
         <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="velcrodesignfiles">
+          <uap:FileTypeAssociation Name="suppadesignerfiles">
             <uap:SupportedFileTypes>
-              <uap:FileType>.vds</uap:FileType>
+              <uap:FileType>.sds</uap:FileType>
             </uap:SupportedFileTypes>
-            <uap:DisplayName>Velcro Design Files</uap:DisplayName>
+            <uap:DisplayName>Suppa Design Files</uap:DisplayName>
             <uap:EditFlags OpenIsSafe="true"/>
           </uap:FileTypeAssociation>
         </uap:Extension>
+
+        <uap3:Extension Category="windows.appExtensionHost">
+          <uap3:AppExtensionHost>
+            <uap3:Name>superjmn.suppadesigner</uap3:Name>
+          </uap3:AppExtensionHost>
+        </uap3:Extension>
+
       </Extensions>
     </Application>
   </Applications>
