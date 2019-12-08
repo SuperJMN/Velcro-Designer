@@ -15,7 +15,7 @@
             <MenuFlyoutSeparator />
             <MenuFlyoutItem Text="Open" Command="{Binding Load}" />
             <MenuFlyoutSeparator  />
-            <MenuFlyoutItem Text="Import" Command="{Binding ShowImport}" />
+            <MenuFlyoutItem Text="Export" Command="{Binding Export}" />
             <MenuFlyoutSeparator  />
             <MenuFlyoutItem Text="Save" Command="{Binding Save}" />
         </MenuBarItem>

@@ -6,7 +6,6 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Designer.Domain.ViewModels;
 using ReactiveUI;
-using Zafiro.Core;
 using Zafiro.Core.Files;
 using Document = Designer.Domain.Models.Document;
 
@@ -15,40 +14,56 @@ namespace Designer.Core
     public class MainViewModel : ReactiveObject
     {
         private readonly ObservableAsPropertyHelper<ReactiveCommand<Unit, Unit>> align;
+
+        private readonly KeyValuePair<string, IList<string>>[] exportExtensions =
+        {
+            new KeyValuePair<string, IList<string>>(Constants.FileFormatName,
+                new List<string> {".txt"})
+        };
+
         private readonly ObservableAsPropertyHelper<bool> isBusy;
         private readonly IProjectMapper mapper;
         private readonly ObservableAsPropertyHelper<Project> project;
         private readonly IProjectStore projectStore;
+
+        private readonly KeyValuePair<string, IList<string>>[] saveExtensions =
+        {
+            new KeyValuePair<string, IList<string>>(Constants.FileFormatName,
+                new List<string> {Constants.FileFormatExtension})
+        };
+
         private bool isImportVisible;
 
         public MainViewModel(IFilePicker filePicker, IProjectMapper mapper,
-            IProjectStore projectStore, ImportExtensionsViewModel importViewModel, IDesignContext designContext)
+            IProjectStore projectStore, IExporter exporter, IDesignContext designContext)
         {
             DesignContext = designContext;
             this.mapper = mapper;
             this.projectStore = projectStore;
-
-            var saveExtensions = new[]
-            {
-                new KeyValuePair<string, IList<string>>(Constants.FileFormatName,
-                    new List<string> {Constants.FileFormatExtension})
-            };
+            var fileOperator = new FileOperator(filePicker);
 
             Load = ReactiveCommand.CreateFromObservable(() =>
                 LoadProject(filePicker, new[] {Constants.FileFormatExtension}));
 
             New = ReactiveCommand.Create(CreateNewDocument);
 
-            Save = ReactiveCommand.CreateFromObservable(() => SaveProject(filePicker, Project, saveExtensions));
+            Save = ReactiveCommand.CreateFromObservable(
+                () =>
+                {
+                    return fileOperator.SaveFile(stream => projectStore.Save(mapper.Map(Project), stream),
+                        saveExtensions, "Choose a file to save");
+                });
 
-            LoadFromFile =
-                ReactiveCommand.CreateFromTask<ZafiroFile, Domain.Models.Project>(zafiroFile =>
-                    LoadProject(zafiroFile, projectStore));
+            LoadFromFile = ReactiveCommand.CreateFromObservable(() =>
+                fileOperator.OpenFile(projectStore.Load, new[] {Constants.FileFormatExtension}));
+
+            Export = ReactiveCommand.CreateFromObservable(() =>
+                fileOperator.SaveFile(stream => exporter.Export(mapper.Map(Project), stream), exportExtensions,
+                    "Select a file"));
 
             var projects = Load
                 .Merge(New)
                 .Merge(LoadFromFile)
-                .Merge(importViewModel.ImportedProjects)
                 .Do(_ => IsImportVisible = false);
 
             project = projects
@@ -58,7 +73,7 @@ namespace Designer.Core
 
             isBusy = Load.IsExecuting
                 .Merge(Save.IsExecuting)
-                .Merge(importViewModel.IsBusy)
+                .Merge(Export.IsExecuting)
                 .Merge(LoadFromFile.IsExecuting)
                 .ToProperty(this, x => x.IsBusy);
 
@@ -77,7 +92,7 @@ namespace Designer.Core
 
         public ReactiveCommand<Unit, bool> HideImport { get; }
 
-        public ReactiveCommand<ZafiroFile, Domain.Models.Project> LoadFromFile { get; }
+        public ReactiveCommand<Unit, Domain.Models.Project> LoadFromFile { get; }
 
         public bool IsImportVisible
         {
@@ -87,13 +102,15 @@ namespace Designer.Core
 
         public bool IsBusy => isBusy.Value;
 
-        public ReactiveCommand<Unit, Project> Save { get; }
+        public ReactiveCommand<Unit, Unit> Save { get; }
 
         public Project Project => project.Value;
 
         public ReactiveCommand<Unit, Domain.Models.Project> New { get; }
 
         public ReactiveCommand<Unit, Domain.Models.Project> Load { get; }
+
+        public ReactiveCommand<Unit, Unit> Export { get; }
 
         private static Domain.Models.Project CreateNewDocument()
         {

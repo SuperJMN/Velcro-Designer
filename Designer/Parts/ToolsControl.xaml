@@ -18,11 +18,7 @@
             <valueConverters:StringToObjectConverter>
                 <valueConverters:StringToObjectConverter.Items>
                     <ResourceDictionary>
-                        <BitmapImage x:Key="RectangleTool" UriSource="/Assets/Tools/Rectangle.png" />
-                        <BitmapImage x:Key="EllipseTool" UriSource="/Assets/Tools/Ellipse.png" />
-                        <BitmapImage x:Key="TextTool" UriSource="/Assets/Tools/Text.png" />
-                        <BitmapImage x:Key="LineTool" UriSource="/Assets/Tools/Line.png" />
-                        <BitmapImage x:Key="ImageTool" UriSource="/Assets/Tools/Image.png" />
+                        <BitmapImage x:Key="EllipseShapeTool" UriSource="/Assets/Tools/Ellipse.png" />
                     </ResourceDictionary>
                 </valueConverters:StringToObjectConverter.Items>
             </valueConverters:StringToObjectConverter>

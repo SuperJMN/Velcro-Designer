@@ -21,7 +21,7 @@ namespace Designer
             Container.Configure(registrationBlock =>
             {
                 var toolType = typeof(Tool);
-                var assembly = typeof(RectangleTool).Assembly;
+                var assembly = typeof(EllipseShapeTool).Assembly;
 
                 registrationBlock.Export(assembly.ExportedTypes
                         .Where(TypesThat.AreBasedOn<Tool>())
@@ -40,6 +40,8 @@ namespace Designer
                 registrationBlock.Export<ProjectMapper>().As<IProjectMapper>().Lifestyle.Singleton();
                 registrationBlock.Export<ImportExtensionsViewModel>().Lifestyle.Singleton();
                 registrationBlock.Export<MainViewModel>().Lifestyle.Singleton();
+                registrationBlock.Export<CodeExporter>().As<IExporter>().Lifestyle.Singleton();
+
             });
         }
 

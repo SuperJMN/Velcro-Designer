@@ -99,28 +99,28 @@ namespace Designer
             deferral.Complete();
         }
 
-        protected override void OnFileActivated(FileActivatedEventArgs args)
-        {
-            var rootFrame = Window.Current.Content as Frame;
+        //protected override void OnFileActivated(FileActivatedEventArgs args)
+        //{
+        //    var rootFrame = Window.Current.Content as Frame;
 
-            if (rootFrame == null)
-            {
-                rootFrame = new Frame();
-                rootFrame.NavigationFailed += OnNavigationFailed;
-                Window.Current.Content = rootFrame;
-            }
+        //    if (rootFrame == null)
+        //    {
+        //        rootFrame = new Frame();
+        //        rootFrame.NavigationFailed += OnNavigationFailed;
+        //        Window.Current.Content = rootFrame;
+        //    }
 
-            if (rootFrame.Content == null)
-            {
-                rootFrame.Navigate(typeof(MainPage));
-            }
+        //    if (rootFrame.Content == null)
+        //    {
+        //        rootFrame.Navigate(typeof(MainPage));
+        //    }
 
-            Window.Current.Activate();
+        //    Window.Current.Activate();
 
-            var file = args.Files[0];
-            var uwpFile = new UwpFile((StorageFile)file);
+        //    var file = args.Files[0];
+        //    var uwpFile = new UwpFile((StorageFile)file);
 
-            Composition.Root.LoadFromFile.Execute(uwpFile).Subscribe();
-        }
+        //    Composition.Root.LoadFromFile.Execute(uwpFile).Subscribe();
+        //}
     }
 }

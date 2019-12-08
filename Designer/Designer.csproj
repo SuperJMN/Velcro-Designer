@@ -153,23 +153,11 @@
       <DependentUpon>EditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\ExtensionsProvider.cs" />
-    <Compile Include="Parts\Graphics\EllipseControl.xaml.cs">
-      <DependentUpon>EllipseControl.xaml</DependentUpon>
+    <Compile Include="Parts\Graphics\EllipseShapeControl.xaml.cs">
+      <DependentUpon>EllipseShapeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Parts\Graphics\LineControl.xaml.cs">
-      <DependentUpon>LineControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Parts\Graphics\NumericFieldControl.xaml.cs">
-      <DependentUpon>NumericFieldControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Parts\Graphics\RectangleControl.xaml.cs">
-      <DependentUpon>RectangleControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Parts\Graphics\TextBoxControl.xaml.cs">
-      <DependentUpon>TextBoxControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Parts\Graphics\TextFieldControl.xaml.cs">
-      <DependentUpon>TextFieldControl.xaml</DependentUpon>
+    <Compile Include="Parts\Graphics\RectangleShapeControl.xaml.cs">
+      <DependentUpon>RectangleShapeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Parts\ImportExtensionsControl.xaml.cs">
       <DependentUpon>ImportExtensionsControl.xaml</DependentUpon>
@@ -199,7 +187,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Designer_TemporaryKey.pfx" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
@@ -254,7 +241,6 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
-    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -276,27 +262,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Parts\Graphics\EllipseControl.xaml">
+    <Page Include="Parts\Graphics\EllipseShapeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Parts\Graphics\LineControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Parts\Graphics\NumericFieldControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Parts\Graphics\RectangleControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Parts\Graphics\TextBoxControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Parts\Graphics\TextFieldControl.xaml">
+    <Page Include="Parts\Graphics\RectangleShapeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

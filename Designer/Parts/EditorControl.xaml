@@ -20,32 +20,11 @@
         <sel:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector">
             <sel:TypeNameTemplateSelector.Items>
                 <ResourceDictionary>
-                    <DataTemplate x:Key="Rectangle">
-                        <graphics:RectangleControl />
+                    <DataTemplate x:Key="EllipseShape" x:DataType="graphics:EllipseShapeControl">
+                        <graphics:EllipseShapeControl />
                     </DataTemplate>
-
-                    <DataTemplate x:Key="Ellipse" x:DataType="items:Ellipse">
-                        <graphics:EllipseControl />
-                    </DataTemplate>
-
-                    <DataTemplate x:Key="Image" x:DataType="items:Image">
-                        <Image Stretch="Fill" Source="{Binding Source, Converter={StaticResource ImageConverter}}" />
-                    </DataTemplate>
-
-                    <DataTemplate x:Key="TextBox">
-                        <graphics:TextBoxControl />
-                    </DataTemplate>
-
-                    <DataTemplate x:Key="TextField">
-                        <graphics:TextFieldControl />
-                    </DataTemplate>
-
-                    <DataTemplate x:Key="NumericField">
-                        <graphics:NumericFieldControl />
-                    </DataTemplate>
-
-                    <DataTemplate x:Key="Line" x:DataType="Line">
-                        <graphics:LineControl />
+                    <DataTemplate x:Key="RectangleShape" x:DataType="graphics:EllipseShapeControl">
+                        <graphics:RectangleShapeControl />
                     </DataTemplate>
                 </ResourceDictionary>
             </sel:TypeNameTemplateSelector.Items>
@@ -119,9 +98,6 @@
                                       ItemsSource="{Binding Graphics}"
                                       LeftBinding="{Binding Left, Mode=TwoWay}"
                                       TopBinding="{Binding Top, Mode=TwoWay}"
-                                      HeightBinding="{Binding Height, Mode=TwoWay}"
-                                      WidthBinding="{Binding Width, Mode=TwoWay}"
-                                      AngleBinding="{Binding Angle, Mode=OneWay}"
                                       ItemTemplateSelector="{StaticResource TypeNameTemplateSelector}"
                                       SelectedItems="{Binding SelectedItems, Mode=TwoWay}">
                 <designer:DesignerSurface.ContextFlyout>
