@@ -22,7 +22,7 @@ namespace Designer.Domain.ViewModels
                     context.Nodes = document.Graphics;
                 }
 
-                context.Selection = new List<Graphic>();
+                context.Selection = new List<Item>();
             });
 
             var selectedObjects = this.WhenAnyObservable(x => x.SelectedDocument.Selection);

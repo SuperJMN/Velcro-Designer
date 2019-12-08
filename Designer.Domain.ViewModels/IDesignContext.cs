@@ -4,8 +4,8 @@ namespace Designer.Domain.ViewModels
 {
     public interface IDesignContext
     {
-        ICollection<Graphic> Nodes { get; set; }
-        ICollection<Graphic> Selection { get; set; }
+        ICollection<Item> Nodes { get; set; }
+        ICollection<Item> Selection { get; set; }
         IDesignCommandsHost DesignCommandsHost { get; set; }
     }
 }

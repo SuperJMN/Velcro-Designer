@@ -2,7 +2,7 @@ using ReactiveUI;
 
 namespace Designer.Domain.ViewModels
 {
-    public class RectangleShape : Graphic
+    public class RectangleShape : Item
     {
         private double width;
         private double height;

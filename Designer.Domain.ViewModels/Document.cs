@@ -20,7 +20,7 @@ namespace Designer.Domain.ViewModels
             Tools = tools;
             Selection = this
                 .WhenAnyValue(x => x.SelectedItems)
-                .Select(list => list == null ? new List<Graphic>() : list.Cast<Graphic>().ToList());
+                .Select(list => list == null ? new List<Item>() : list.Cast<Item>().ToList());
 
             AlignChanged = this.WhenAnyValue(x => x.Align);
 
@@ -29,7 +29,7 @@ namespace Designer.Domain.ViewModels
 
         public IObservable<ReactiveCommand<Unit, Unit>> AlignChanged { get; set; }
 
-        public ObservableCollection<Graphic> Graphics { get; set; } = new ObservableCollection<Graphic>();
+        public ObservableCollection<Item> Graphics { get; set; } = new ObservableCollection<Item>();
 
         public string Name
         {
@@ -43,7 +43,7 @@ namespace Designer.Domain.ViewModels
             set => this.RaiseAndSetIfChanged(ref selectedItems, value);
         }
 
-        public IObservable<IList<Graphic>> Selection { get; }
+        public IObservable<IList<Item>> Selection { get; }
 
         public ReactiveCommand<Unit, Unit> Align { get; set; }
     }

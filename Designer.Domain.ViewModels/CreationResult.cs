@@ -2,10 +2,10 @@ namespace Designer.Domain.ViewModels
 {
     public class CreationResult
     {
-        public Graphic Node { get; }
+        public Item Node { get; }
         public bool IsSuccessful { get; set; } = true;
 
-        public CreationResult(Graphic node)
+        public CreationResult(Item node)
         {
             Node = node;
         }

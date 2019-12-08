@@ -7,8 +7,8 @@ namespace Designer.Core
 {
     public class DesignContext : ReactiveObject, IDesignContext
     {
-        private ICollection<Graphic> nodes;
-        private ICollection<Graphic> selection;
+        private ICollection<Item> nodes;
+        private ICollection<Item> selection;
         private IDesignCommandsHost designCommandsHost;
 
         public DesignContext()
@@ -16,13 +16,13 @@ namespace Designer.Core
             MessageBus.Current.Listen<CommandsHostChanged>().Subscribe(message => DesignCommandsHost = message.CommandsHost);
         }
 
-        public ICollection<Graphic> Nodes
+        public ICollection<Item> Nodes
         {
             get => nodes;
             set => this.RaiseAndSetIfChanged(ref nodes, value);
         }
 
-        public ICollection<Graphic> Selection
+        public ICollection<Item> Selection
         {
             get => selection;
             set => this.RaiseAndSetIfChanged(ref selection, value);

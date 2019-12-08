@@ -25,7 +25,7 @@ namespace Designer.Core
             config.CreateMap<Document, Domain.ViewModels.Document>(MemberList.Source)
                 .ConstructUsingServiceLocator();
 
-            config.CreateMap<Graphic, Domain.ViewModels.Graphic>(MemberList.Source)
+            config.CreateMap<Graphic, Domain.ViewModels.Item>(MemberList.Source)
                 .IncludeAllDerived();
         }
 
@@ -34,7 +34,7 @@ namespace Designer.Core
             config.CreateMap<Domain.ViewModels.Project, Domain.Models.Project>(MemberList.Destination);
             config.CreateMap<Domain.ViewModels.Document, Document>(MemberList.Destination);
 
-            config.CreateMap<Domain.ViewModels.Graphic, Graphic>(MemberList.Source)
+            config.CreateMap<Domain.ViewModels.Item, Graphic>(MemberList.Source)
                 .IncludeAllDerived();
         }
 

@@ -2,7 +2,7 @@ using ReactiveUI;
 
 namespace Designer.Domain.ViewModels
 {
-    public abstract class Graphic : ReactiveObject
+    public abstract class Item : ReactiveObject
     {
         private double left;
         private double top;
@@ -17,6 +17,14 @@ namespace Designer.Domain.ViewModels
         {
             get => top;
             set => this.RaiseAndSetIfChanged(ref top, value);
+        }
+
+        private string name;
+
+        public string Name
+        {
+            get => name;
+            set => this.RaiseAndSetIfChanged(ref name, value);
         }
     }
 }

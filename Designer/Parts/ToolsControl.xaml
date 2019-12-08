@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:Designer.Converters"
     xmlns:valueConverters="using:ValueConverters"
-    xmlns:tools="using:Designer.Core.Tools"
     xmlns:items="using:Designer.Domain.ViewModels"
     mc:Ignorable="d"
     d:DesignHeight="300"
@@ -19,6 +18,7 @@
                 <valueConverters:StringToObjectConverter.Items>
                     <ResourceDictionary>
                         <BitmapImage x:Key="EllipseShapeTool" UriSource="/Assets/Tools/Ellipse.png" />
+                        <BitmapImage x:Key="RectangleShapeTool" UriSource="/Assets/Tools/Rectangle.png" />
                     </ResourceDictionary>
                 </valueConverters:StringToObjectConverter.Items>
             </valueConverters:StringToObjectConverter>

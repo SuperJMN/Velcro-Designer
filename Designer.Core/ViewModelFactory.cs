@@ -26,7 +26,6 @@ namespace Designer.Core
         {
             var document = locatorService.Locate<Document>();
             document.Name = "New document";
-            document.Graphics = new ObservableCollection<Graphic>();
             return document;
         }
     }

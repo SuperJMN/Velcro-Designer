@@ -2,7 +2,7 @@
 
 namespace Designer.Domain.ViewModels
 {
-    public class EllipseShape : Graphic
+    public class EllipseShape : Item
     {
         private double horizontalRadius;
 

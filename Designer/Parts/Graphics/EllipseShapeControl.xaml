@@ -15,7 +15,7 @@
     <ContentControl>
         <Grid>
             <Ellipse Width="{Binding HorizontalRadius}" Height="{Binding VerticalRadius}" Fill="Red" />
-            <design:DeltaContentControl x:Name="Resizer"
+            <design:DeltaContentControl x:Name="Resizer" Visibility="Collapsed"
                 Style="{StaticResource HandleStyle}"
                                         Horizontal="{Binding HorizontalRadius, Mode=TwoWay}"
                                         Vertical="{Binding VerticalRadius, Mode=TwoWay}" />
