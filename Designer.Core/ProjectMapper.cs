@@ -1,6 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Collections;
+using System.Collections.Generic;
+using AutoMapper;
 using Designer.Domain.Models;
+using Designer.Domain.ViewModels;
+using DynamicData;
 using Grace.DependencyInjection;
+using Document = Designer.Domain.Models.Document;
+using Project = Designer.Domain.Models.Project;
 
 namespace Designer.Core
 {
@@ -12,6 +18,7 @@ namespace Designer.Core
         {
             mapper = new MapperConfiguration(config =>
             {
+                //config.CreateMap(typeof(IEnumerable<>), typeof(SourceList<>)).ConvertUsing(typeof(SourceListConverter<,>));
                 config.ConstructServicesUsing(locator.Locate);
                 MapToDomain(config);
                 MapFromDomain(config);
@@ -23,8 +30,10 @@ namespace Designer.Core
             config.CreateMap<Project, Domain.ViewModels.Project>(MemberList.Source)
                 .ConstructUsingServiceLocator();
             config.CreateMap<Document, Domain.ViewModels.Document>(MemberList.Source)
+                .ForMember(x => x.Graphics, e => e.Ignore())
+                .AfterMap((a, b, r) => b.Add(r.Mapper.Map<IEnumerable<Item>>(a.Graphics)))
                 .ConstructUsingServiceLocator();
-
+                
             config.CreateMap<Graphic, Domain.ViewModels.Item>(MemberList.Source)
                 .IncludeAllDerived();
         }

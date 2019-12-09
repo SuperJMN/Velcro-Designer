@@ -14,7 +14,7 @@ namespace Designer.Domain.ViewModels
                 var creationResult = await Create(CreationArea);
                 if (creationResult.IsSuccessful)
                 {
-                    context.Nodes.Add(creationResult.Node);
+                    context.Document.Add(creationResult.Node);
                 }
             });
         }

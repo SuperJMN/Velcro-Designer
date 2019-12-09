@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reactive;
 using ReactiveUI;
 
@@ -19,14 +20,9 @@ namespace Designer.Domain.ViewModels
             {
                 if (document != null)
                 {
-                    context.Nodes = document.Graphics;
+                    context.Document = document;
                 }
-
-                context.Selection = new List<Item>();
             });
-
-            var selectedObjects = this.WhenAnyObservable(x => x.SelectedDocument.Selection);
-            selectedObjects.Subscribe(selection => context.Selection = selection);
 
             AddDocument = ReactiveCommand.Create(() =>
             {
@@ -38,7 +34,7 @@ namespace Designer.Domain.ViewModels
 
         public ReactiveCommand<Unit, Unit> AddDocument { get; set; }
 
-        public ObservableCollection<Document> Documents { get; private set; } = new ObservableCollection<Document>();
+        public ObservableCollection<Document> Documents { get; } = new ObservableCollection<Document>();
 
         public Document SelectedDocument
         {
