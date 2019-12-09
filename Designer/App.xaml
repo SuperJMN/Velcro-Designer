@@ -10,6 +10,8 @@
     xmlns:convs="using:ValueConverters"
     xmlns:converters="using:Zafiro.Uwp.Converters"
     xmlns:design="using:Zafiro.Uwp.Design"
+    xmlns:templateSelectors="using:Designer.TemplateSelectors"
+    xmlns:graphics="using:Designer.Parts.Graphics"
     RequestedTheme="Light">
 
 
@@ -62,6 +64,20 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <templateSelectors:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector">
+                <templateSelectors:TypeNameTemplateSelector.Items>
+                    <ResourceDictionary>
+                        <DataTemplate x:Key="EllipseShape">
+                            <graphics:EllipseShapeControl />
+                        </DataTemplate>
+                        <DataTemplate x:Key="RectangleShape">
+                            <graphics:RectangleShapeControl />
+                        </DataTemplate>
+                    </ResourceDictionary>
+                </templateSelectors:TypeNameTemplateSelector.Items>
+            </templateSelectors:TypeNameTemplateSelector>
+
 
         </ResourceDictionary>
     </Application.Resources>

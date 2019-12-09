@@ -9,10 +9,12 @@ namespace Designer.Domain.ViewModels
 {
     public class Project : ReactiveObject
     {
+        private readonly IDesignContext context;
         private Document selectedDocument;
 
         public Project(IViewModelFactory factory, IDesignContext context, IEnumerable<Tool> tools)
         {
+            this.context = context;
             Tools = tools;
             
             var selectedObjectObs = this.WhenAnyValue(x => x.SelectedDocument);
@@ -43,5 +45,7 @@ namespace Designer.Domain.ViewModels
         }
 
         public IEnumerable<Tool> Tools { get; }
+
+        public IDesignContext Context => context;
     }
 }

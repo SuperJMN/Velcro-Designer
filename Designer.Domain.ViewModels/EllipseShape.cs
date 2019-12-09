@@ -19,5 +19,13 @@ namespace Designer.Domain.ViewModels
             get => verticalRadius;
             set => this.RaiseAndSetIfChanged(ref verticalRadius, value);
         }
+
+        private Item colleague;
+
+        public Item Colleague
+        {
+            get => colleague;
+            set => this.RaiseAndSetIfChanged(ref colleague, value);
+        }
     }
 }

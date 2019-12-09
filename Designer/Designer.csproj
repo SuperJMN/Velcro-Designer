@@ -153,6 +153,9 @@
       <DependentUpon>EditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\ExtensionsProvider.cs" />
+    <Compile Include="Parts\Editors\GraphicSelector.xaml.cs">
+      <DependentUpon>GraphicSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Parts\Graphics\EllipseShapeControl.xaml.cs">
       <DependentUpon>EllipseShapeControl.xaml</DependentUpon>
     </Compile>
@@ -259,6 +262,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Parts\EditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Editors\GraphicSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

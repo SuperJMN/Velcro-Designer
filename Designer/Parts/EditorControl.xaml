@@ -15,23 +15,6 @@
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance items:Document}">
 
-    <UserControl.Resources>
-
-        <sel:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector">
-            <sel:TypeNameTemplateSelector.Items>
-                <ResourceDictionary>
-                    <DataTemplate x:Key="EllipseShape" x:DataType="graphics:EllipseShapeControl">
-                        <graphics:EllipseShapeControl />
-                    </DataTemplate>
-                    <DataTemplate x:Key="RectangleShape" x:DataType="graphics:EllipseShapeControl">
-                        <graphics:RectangleShapeControl />
-                    </DataTemplate>
-                </ResourceDictionary>
-            </sel:TypeNameTemplateSelector.Items>
-        </sel:TypeNameTemplateSelector>
-
-    </UserControl.Resources>
-
     <controls:DockPanel>
 
         <Grid controls:DockPanel.Dock="Top">

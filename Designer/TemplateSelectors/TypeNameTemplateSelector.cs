@@ -10,11 +10,14 @@ namespace Designer.TemplateSelectors
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-            var dict = (IDictionary<object, object>) Items;
-
-            if (dict.TryGetValue(item.GetType().Name, out var t))
+            if (item != null)
             {
-                return (DataTemplate) t;
+                var dict = (IDictionary<object, object>)Items;
+
+                if (dict.TryGetValue(item.GetType().Name, out var t))
+                {
+                    return (DataTemplate)t;
+                }
             }
 
             return base.SelectTemplateCore(item, container);
