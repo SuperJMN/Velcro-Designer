@@ -162,6 +162,9 @@
     <Compile Include="Parts\Graphics\RectangleShapeControl.xaml.cs">
       <DependentUpon>RectangleShapeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Parts\Graphics\PointControl.xaml.cs">
+      <DependentUpon>PointControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Parts\ImportExtensionsControl.xaml.cs">
       <DependentUpon>ImportExtensionsControl.xaml</DependentUpon>
     </Compile>
@@ -274,6 +277,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Parts\Graphics\RectangleShapeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\PointControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

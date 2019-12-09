@@ -74,6 +74,9 @@
                         <DataTemplate x:Key="RectangleShape">
                             <graphics:RectangleShapeControl />
                         </DataTemplate>
+                        <DataTemplate x:Key="Point">
+                            <graphics:PointControl />
+                        </DataTemplate>
                     </ResourceDictionary>
                 </templateSelectors:TypeNameTemplateSelector.Items>
             </templateSelectors:TypeNameTemplateSelector>
