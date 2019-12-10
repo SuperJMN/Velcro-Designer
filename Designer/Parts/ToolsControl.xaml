@@ -20,6 +20,7 @@
                         <BitmapImage x:Key="EllipseShapeTool" UriSource="/Assets/Tools/Ellipse.png" />
                         <BitmapImage x:Key="RectangleShapeTool" UriSource="/Assets/Tools/Rectangle.png" />
                         <BitmapImage x:Key="PointTool" UriSource="/Assets/Tools/Point.png" />
+                        <BitmapImage x:Key="WheelJointTool" UriSource="/Assets/Tools/WheelJoint.png" />
 
                     </ResourceDictionary>
                 </valueConverters:StringToObjectConverter.Items>

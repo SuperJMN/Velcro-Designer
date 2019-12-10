@@ -159,6 +159,9 @@
     <Compile Include="Parts\Graphics\EllipseShapeControl.xaml.cs">
       <DependentUpon>EllipseShapeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Parts\Graphics\WheelJointControl.xaml.cs">
+      <DependentUpon>WheelJointControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Parts\Graphics\RectangleShapeControl.xaml.cs">
       <DependentUpon>RectangleShapeControl.xaml</DependentUpon>
     </Compile>
@@ -193,6 +196,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Assets\Tools\WheelJoint.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
@@ -275,6 +279,10 @@
     <Page Include="Parts\Graphics\EllipseShapeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Parts\Graphics\WheelJointControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Parts\Graphics\RectangleShapeControl.xaml">
       <SubType>Designer</SubType>

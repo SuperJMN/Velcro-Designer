@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Designer.Parts.Graphics.PointControl"
+    x:Class="Designer.Parts.Graphics.WheelJointControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,6 +9,6 @@
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance viewModels:Point}">
 
-    <Image Source="/Assets/Tools/Point.png" Width="16" />
+    <Image Source="/Assets/Tools/WheelJoint.png" Height="32" />
 
 </UserControl>

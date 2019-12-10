@@ -2,7 +2,11 @@
 
 namespace Designer.Domain.ViewModels
 {
-    public class EllipseShape : Item
+    public abstract class Body : Item
+    {
+    }
+
+    public class EllipseShape : Body
     {
         private double horizontalRadius;
 
@@ -18,14 +22,6 @@ namespace Designer.Domain.ViewModels
         {
             get => verticalRadius;
             set => this.RaiseAndSetIfChanged(ref verticalRadius, value);
-        }
-
-        private Item colleague;
-
-        public Item Colleague
-        {
-            get => colleague;
-            set => this.RaiseAndSetIfChanged(ref colleague, value);
         }
     }
 }
