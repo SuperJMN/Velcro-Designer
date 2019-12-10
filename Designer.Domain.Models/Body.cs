@@ -1,6 +1,7 @@
 ﻿namespace Designer.Domain.Models
 {
-    public class Body : Item
+    public abstract class Body : Item
     {
+        public int Id { get; set; }
     }
 }

@@ -11,10 +11,9 @@ namespace Designer.Core.Tools
         {
         }
 
-        protected override Task<CreationResult> Create(Rect creationArea)
+        protected override Task<CreationResult> Create(Rect creationArea, int id)
         {
             var creationResult = new CreationResult(new WheelJoint()
-
             {
                 Left = creationArea.Left,
                 Top = creationArea.Top,

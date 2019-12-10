@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Designer.Core;
+using Designer.Core.Mapper;
 using Designer.Core.Persistence;
 using Designer.Core.Tools;
 using Designer.Domain.ViewModels;

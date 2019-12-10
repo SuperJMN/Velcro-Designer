@@ -24,6 +24,7 @@
     <oe:ObjectEditor SelectedItems="{Binding SelectedDocument.SelectedItems}" Margin="4">
         <oe:ObjectEditor.DefaultEditorTemplate>
             <DataTemplate>
+                <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                 <TextBox Text="{Binding Value, Mode=TwoWay}" />
             </DataTemplate>
         </oe:ObjectEditor.DefaultEditorTemplate>

@@ -10,11 +10,11 @@ namespace Designer.Core.Tools
         {
         }
 
-        protected override Task<CreationResult> Create(Rect creationArea)
+        protected override Task<CreationResult> Create(Rect creationArea, int id)
         {
             var creationResult = new CreationResult(new EllipseShape
-
             {
+                Id = id,
                 Left = creationArea.Left,
                 HorizontalRadius = creationArea.Width,
                 Top = creationArea.Top,

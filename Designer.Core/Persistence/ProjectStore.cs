@@ -18,6 +18,7 @@ namespace Designer.Core.Persistence
                 .UseOptimizedNamespaces()
                 .EnableParameterizedContent()
                 .Register(ColorConverter.Default)
+                .EnableReferences()
                 .Create();
         }
 

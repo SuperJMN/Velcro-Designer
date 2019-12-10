@@ -11,7 +11,7 @@ namespace Designer.Domain.ViewModels
         {
             CreateCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                var creationResult = await Create(CreationArea);
+                var creationResult = await Create(CreationArea, context.Document.Graphics.Count + 1);
                 if (creationResult.IsSuccessful)
                 {
                     context.Document.Add(creationResult.Node);
@@ -23,6 +23,6 @@ namespace Designer.Domain.ViewModels
 
         public ICommand CreateCommand { get; }        
 
-        protected abstract Task<CreationResult> Create(Rect creationArea);
+        protected abstract Task<CreationResult> Create(Rect creationArea, int id);
     }
 }
