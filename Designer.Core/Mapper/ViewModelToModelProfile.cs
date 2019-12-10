@@ -2,9 +2,9 @@
 
 namespace Designer.Core.Mapper
 {
-    public class ToModelProfile : Profile
+    public class ViewModelToModelProfile : Profile
     {
-        public ToModelProfile()
+        public ViewModelToModelProfile()
         {
             CreateMap<Domain.ViewModels.Project, Domain.Models.Project>(MemberList.Destination);
             CreateMap<Domain.ViewModels.Document, Domain.Models.Document>(MemberList.Destination);

@@ -4,7 +4,7 @@ namespace Designer.Domain.Models
 {
     public class Document
     {
-        public IEnumerable<Item> Graphics { get; set; }
+        public IList<Item> Items { get; set; }
 
         public string Name { get; set; }
     }

@@ -16,8 +16,8 @@ namespace Designer.Domain.ViewModels
         public IEnumerable<Tool> Tools { get; }
         private IEnumerable selectedItems;
         private string name;
-        private readonly SourceList<Item> sourceList;
-        private readonly ReadOnlyObservableCollection<Item> graphics;
+        private ReadOnlyObservableCollection<Item> itemsCollection;
+        private SourceList<Item> items;
 
         public Document(IEnumerable<Tool> tools)
         {
@@ -26,18 +26,12 @@ namespace Designer.Domain.ViewModels
                 .WhenAnyValue(x => x.SelectedItems)
                 .Select(list => list == null ? new List<Item>() : list.Cast<Item>().ToList());
 
-            sourceList = new SourceList<Item>();
-            sourceList
-                .Connect()
-                .ObserveOn(SynchronizationContext.Current)
-                .Bind(out graphics)
-                .DisposeMany()
-                .Subscribe();
+            items = new SourceList<Item>();
         }
 
         public IObservable<ReactiveCommand<Unit, Unit>> AlignChanged { get; set; }
 
-        public ReadOnlyObservableCollection<Item> Graphics => graphics;
+        public ReadOnlyObservableCollection<Item> ItemsCollection => itemsCollection;
 
         public string Name
         {
@@ -53,14 +47,19 @@ namespace Designer.Domain.ViewModels
 
         public IObservable<IList<Item>> Selection { get; }
 
-        public void Add(IEnumerable<Item> items)
+        public SourceList<Item> Items
         {
-            sourceList.AddRange(items);
-        }
-
-        public void Add(Item item)
-        {
-            sourceList.Add(item);
+            get => items;
+            private set
+            {
+                items = value;
+                items
+                    .Connect()
+                    .ObserveOn(SynchronizationContext.Current)
+                    .Bind(out itemsCollection)
+                    .DisposeMany()
+                    .Subscribe();
+            }
         }
     }
 }

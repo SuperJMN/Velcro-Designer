@@ -78,7 +78,7 @@
             <designer:DesignerSurface Grid.Column="1"
                                       Grid.Row="1"
                                       x:Name="DesignerSurface"
-                                      ItemsSource="{Binding Graphics}"
+                                      ItemsSource="{Binding ItemsCollection}"
                                       LeftBinding="{Binding Left, Mode=TwoWay}"
                                       TopBinding="{Binding Top, Mode=TwoWay}"
                                       ItemTemplateSelector="{StaticResource TypeNameTemplateSelector}"

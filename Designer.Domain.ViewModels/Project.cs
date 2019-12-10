@@ -36,7 +36,7 @@ namespace Designer.Domain.ViewModels
 
         public ReactiveCommand<Unit, Unit> AddDocument { get; set; }
 
-        public ObservableCollection<Document> Documents { get; } = new ObservableCollection<Document>();
+        public ObservableCollection<Document> Documents { get; private set; } = new ObservableCollection<Document>();
 
         public Document SelectedDocument
         {

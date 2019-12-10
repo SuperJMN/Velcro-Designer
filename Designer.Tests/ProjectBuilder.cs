@@ -15,7 +15,7 @@ namespace Designer.Tests
                 {
                     new Document()
                     {
-                        Graphics = new List<Item>()
+                        Items = new List<Item>()
                         {
                             firstShape,
                             secondShape ,

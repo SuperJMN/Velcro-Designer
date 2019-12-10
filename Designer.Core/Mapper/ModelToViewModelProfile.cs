@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
 using Designer.Domain.Models;
+using DynamicData;
 
 namespace Designer.Core.Mapper
 {
-    public class FromModelProfile : Profile
+    public class ModelToViewModelProfile : Profile
     {
-        public FromModelProfile()
+        public ModelToViewModelProfile()
         {
-
             CreateMap<Project, Domain.ViewModels.Project>(MemberList.Source)
                 .ConstructUsingServiceLocator();
             CreateMap<Document, Domain.ViewModels.Document>(MemberList.Source)
-                .ForMember(x => x.Graphics, e => e.Ignore())
-                .AfterMap((a, b, r) => b.Add(r.Mapper.Map<IEnumerable<Domain.ViewModels.Item>>(a.Graphics)))
+                .ForMember(x => x.ItemsCollection, e => e.Ignore())
                 .ConstructUsingServiceLocator();
 
             CreateMap<Domain.Models.Item, Domain.ViewModels.Item>(MemberList.Source)

@@ -50,7 +50,11 @@ namespace Designer.Core
             Save = ReactiveCommand.CreateFromObservable(
                 () =>
                 {
-                    return fileOperator.SaveFile(stream => projectStore.Save(mapper.Map(Project), stream),
+                    return fileOperator.SaveFile(async stream =>
+                        {
+                            await projectStore.Save(mapper.Map(Project), stream);
+                            await stream.FlushAsync();
+                        },
                         saveExtensions, "Choose a file to save");
                 });
 

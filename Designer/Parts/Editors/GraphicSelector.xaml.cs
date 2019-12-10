@@ -28,7 +28,7 @@ namespace Designer.Parts.Editors
         {
             this.InitializeComponent();
             this.WhenAnyValue(x => x.Document)
-                .Select(x => x?.Graphics)
+                .Select(x => x?.ItemsCollection)
                 .Subscribe(x => Items = x);
         }
 

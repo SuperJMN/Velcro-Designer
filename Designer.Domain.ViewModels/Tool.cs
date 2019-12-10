@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Designer.Domain.Models;
+using DynamicData;
 using ReactiveUI;
 
 namespace Designer.Domain.ViewModels
@@ -11,10 +12,10 @@ namespace Designer.Domain.ViewModels
         {
             CreateCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                var creationResult = await Create(CreationArea, context.Document.Graphics.Count + 1);
+                var creationResult = await Create(CreationArea, context.Document.ItemsCollection.Count + 1);
                 if (creationResult.IsSuccessful)
                 {
-                    context.Document.Add(creationResult.Node);
+                    context.Document.Items.Add(creationResult.Node);
                 }
             });
         }

@@ -4,7 +4,7 @@ using DynamicData;
 
 namespace Designer.Core
 {
-    public class SourceListConverter<TInput, TDestination> : ITypeConverter<IEnumerable<TInput>, SourceList<TDestination>>
+    public class EnumerableToSourceListConverter<TInput, TDestination> : ITypeConverter<IEnumerable<TInput>, SourceList<TDestination>>
     {
         public SourceList<TDestination> Convert(IEnumerable<TInput> source, SourceList<TDestination> destination, ResolutionContext context)
         {
