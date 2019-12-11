@@ -4,6 +4,6 @@ namespace Designer.Domain.Models
 {
     public class Project
     {
-        public IList<Document> Documents { get; set; }
+        public ICollection<Document> Documents { get; set; }
     }
 }

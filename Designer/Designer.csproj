@@ -321,6 +321,9 @@
     <PackageReference Include="Coding4Fun.Toolkit.Controls">
       <Version>2.1.8</Version>
     </PackageReference>
+    <PackageReference Include="ExtendedXmlSerializer">
+      <Version>3.0.2.1-uypiabac</Version>
+    </PackageReference>
     <PackageReference Include="Grace">
       <Version>7.1.0</Version>
     </PackageReference>

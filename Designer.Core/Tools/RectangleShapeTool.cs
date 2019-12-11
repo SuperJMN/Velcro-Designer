@@ -10,7 +10,7 @@ namespace Designer.Core.Tools
         {
         }
 
-        protected override Task<CreationResult> Create(Rect creationArea, int id)
+        protected override Task<CreationResult> Create(Rect creationArea)
         {
             var creationResult = new CreationResult(new RectangleShape()
 

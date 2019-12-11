@@ -2,11 +2,6 @@
 
 namespace Designer.Domain.ViewModels
 {
-    public abstract class Body : Item
-    {
-        public int Id { get; set; }
-    }
-
     public class EllipseShape : Body
     {
         private double horizontalRadius;

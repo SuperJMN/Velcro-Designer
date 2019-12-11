@@ -7,22 +7,22 @@ namespace Designer.Tests
     {
         public static Project Build()
         {
-            var firstShape = new EllipseShape() { Id = 1, };
-            var secondShape = new EllipseShape() { Id = 2, };
-            return new Project()
+            var firstShape = new EllipseShape();
+            var secondShape = new EllipseShape();
+            return new Project
             {
-                Documents = new List<Document>()
+                Documents = new List<Document>
                 {
-                    new Document()
+                    new Document
                     {
-                        Items = new List<Item>()
+                        Items = new List<Item>
                         {
                             firstShape,
                             secondShape ,
-                            new WheelJoint()
+                            new WheelJoint
                             {
                                 FirstBody = firstShape,
-                                SecondBody = secondShape,
+                                SecondBody = secondShape
                             }
                         }
                     }

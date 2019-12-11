@@ -1,18 +1,8 @@
-using System;
-using System.Collections.Generic;
-using AutoMapper;
 using Designer.Core.Mapper;
 using Designer.Domain.ViewModels;
 using DynamicData;
 using Grace.DependencyInjection;
-using Grace.DependencyInjection.Impl;
-using Grace.DependencyInjection.Impl.CompiledStrategies;
-using Grace.DependencyInjection.Impl.FactoryStrategies;
-using Grace.DependencyInjection.Impl.KnownTypeStrategies;
 using Xunit;
-using Zafiro.Core;
-using Zafiro.Core.Files;
-using Item = Designer.Domain.Models.Item;
 
 namespace Designer.Tests
 {
@@ -28,27 +18,26 @@ namespace Designer.Tests
                 Documents =
                 {
                     document
-                },
+                }
             };
 
-            document.Items.Add(new EllipseShape()
+            document.Items.Add(new EllipseShape
             {
-                Id = 1,
                 HorizontalRadius = 12,
                 Left = 15,
                 Name = "Ellipse",
                 Top = 20,
-                VerticalRadius = 80,
+                VerticalRadius = 80
             });
 
-            var first = new EllipseShape {Id = 2,};
-            var second = new EllipseShape {Id = 3};
+            var first = new EllipseShape();
+            var second = new EllipseShape();
 
-            document.Items.Add(new WheelJoint()
+            document.Items.Add(new WheelJoint
             {
                 SecondBody = first,
                 FirstBody = second,
-                Name = "WheelJoint",
+                Name = "WheelJoint"
             });
 
             document.Items.Add(first);
