@@ -6,7 +6,7 @@
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="ExtendedXmlSerializer" Version="3.0.2.1-uypiabac" />
     <PackageReference Include="Grace" Version="7.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="ReactiveUI" Version="10.5.43" />
   </ItemGroup>
   <ItemGroup>
